@@ -64,6 +64,7 @@ static void * const kMXScrollViewKVOContext = (void*)&kMXScrollViewKVOContext;
     self.showsVerticalScrollIndicator = NO;
     self.directionalLockEnabled = YES;
     self.bounces = YES;
+    self.isLock = NO;
     
     self.panGestureRecognizer.cancelsTouchesInView = NO;
     
@@ -194,8 +195,17 @@ static void * const kMXScrollViewKVOContext = (void*)&kMXScrollViewKVOContext;
                 [self scrollView:scrollView setContentOffset:old];
             }
             //Disable bouncing when scroll down
-            if (!_lock && ((self.contentOffset.y > -self.contentInset.top) || self.bounces)) {
-                [self scrollView:scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, -scrollView.contentInset.top)];
+             if(self.isLock == true){
+                //Disable bouncing when scroll down
+                if (!_lock && ((self.contentOffset.y > -self.contentInset.top))) {
+                    [self scrollView:scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, -scrollView.contentInset.top)];
+                }
+            }
+            else{
+                //Disable bouncing when scroll down
+                if (!_lock && ((self.contentOffset.y > -self.contentInset.top) || self.bounces)) {
+                    [self scrollView:scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, -scrollView.contentInset.top)];
+                }
             }
         }
     } else {

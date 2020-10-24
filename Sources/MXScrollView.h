@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, weak, nullable) IBOutlet id<MXScrollViewDelegate> delegate;
 
+@property (nonatomic) _Bool isLock;
+
 @end
 
 NS_ASSUME_NONNULL_END
